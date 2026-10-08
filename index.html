@@ -3,8 +3,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knight's March - 고객지원</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Knight's March - Support</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,31 +21,91 @@
       background: white;
       border-radius: 12px;
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
     h1 { color: #293d58; }
+    button {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+    }
     a { color: #2463a6; }
+    @media (max-width: 480px) {
+      main { padding: 20px; margin: 10px auto; }
+      header { flex-wrap: wrap; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>Knight's March</h1>
-    <h2>고객지원 / Support</h2>
+    <header>
+      <h1>Knight's March</h1>
+      <div>
+        <button onclick="setLanguage('ko')">한국어</button>
+        <button onclick="setLanguage('en')">English</button>
+      </div>
+    </header>
 
-    <p>Knight's March를 이용해 주셔서 감사합니다.</p>
-    <p>게임 관련 문의나 오류 신고는 아래 이메일로 연락해 주세요.</p>
+    <h2 id="heading"></h2>
+    <p id="welcome"></p>
+    <p id="contact"></p>
 
-    <p><strong>이메일:</strong>
-      <a href="mailto:YOUR_EMAIL">ironmarch26@gmail.com</a>
+    <p>
+      <strong id="emailLabel"></strong>
+      <a href="mailto:YOUR_EMAIL">YOUR_EMAIL</a>
     </p>
 
-    <p>문의 시 기기 종류, 게임 버전,
-       문제 상황을 알려주시면 도움이 됩니다.</p>
-
-    <hr>
-    <p>For game support or bug reports,
-       please contact us by email.</p>
-    <p>Please include your device model,
-       game version, and a description of the issue.</p>
+    <h3 id="detailsHeading"></h3>
+    <ul>
+      <li id="device"></li>
+      <li id="version"></li>
+      <li id="issue"></li>
+    </ul>
   </main>
+
+  <script>
+    const translations = {
+      ko: {
+        heading: "고객지원",
+        welcome: "Knight's March를 이용해 주셔서 감사합니다.",
+        contact: "게임 이용 중 문제가 발생하거나 문의 사항이 있다면 아래 이메일로 연락해 주세요.",
+        emailLabel: "이메일: ironmarch26@gmail.com",
+        detailsHeading: "문의 시 다음 정보를 알려주세요.",
+        device: "기기 모델 및 OS 버전",
+        version: "게임 버전",
+        issue: "문제 상황에 대한 설명"
+      },
+      en: {
+        heading: "Support",
+        welcome: "Thank you for playing Knight's March.",
+        contact: "For questions, bug reports, or assistance, please contact us by email.",
+        emailLabel: "Email: ironmarch26@gmail.com",
+        detailsHeading: "Please include the following details.",
+        device: "Device model and OS version",
+        version: "Game version",
+        issue: "Description of the issue"
+      }
+    };
+
+    function setLanguage(lang) {
+      const t = translations[lang] || translations.en;
+      document.documentElement.lang = lang;
+      for (const key in t) {
+        document.getElementById(key).textContent = t[key];
+      }
+    }
+
+    const browserLanguage =
+      navigator.language.toLowerCase().startsWith("ko")
+        ? "ko" : "en";
+
+    setLanguage(browserLanguage);
+  </script>
 </body>
 </html>
-  
