@@ -4,89 +4,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+        content="width=device-width, initial-scale=1.0">
+
   <title>Knight's March - Support</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, "Noto Sans KR", sans-serif;
       background: #f7f7f7;
       color: #333;
       line-height: 1.8;
-      padding: 24px;
     }
+
     main {
-      max-width: 650px;
-      margin: 40px auto;
-      padding: 32px;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 36px;
       background: white;
       border-radius: 12px;
     }
+
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 35px;
     }
-    h1 { color: #293d58; }
+
+    h1 {
+      margin: 0;
+      color: #293d58;
+      font-size: 30px;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: 23px;
+    }
+
+    h3 {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 18px 0;
+    }
+
+    a {
+      color: #2463a6;
+      overflow-wrap: anywhere;
+    }
+
+    .language-switch {
+      display: flex;
+      gap: 6px;
+    }
+
     button {
-      padding: 8px 12px;
+      padding: 8px 13px;
       border: 1px solid #ccc;
       border-radius: 6px;
       background: white;
+      color: #333;
       cursor: pointer;
     }
-    a { color: #2463a6; }
+
+    button:hover {
+      background: #f0f0f0;
+    }
+
+    button.active {
+      background: #293d58;
+      border-color: #293d58;
+      color: white;
+    }
+
+    ul {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    footer {
+      margin-top: 45px;
+      padding-top: 18px;
+      border-top: 1px solid #ddd;
+      color: #777;
+      font-size: 13px;
+      text-align: center;
+    }
+
     @media (max-width: 480px) {
-      main { padding: 20px; margin: 10px auto; }
-      header { flex-wrap: wrap; }
+      body {
+        padding: 12px;
+      }
+
+      main {
+        padding: 22px;
+        margin: 10px auto;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
+
 <body>
   <main>
     <header>
       <h1>Knight's March</h1>
-      <div>
-        <button onclick="setLanguage('ko')">한국어</button>
-        <button onclick="setLanguage('en')">English</button>
+
+      <div class="language-switch">
+        <button id="btn-ko"
+                type="button"
+                onclick="setLanguage('ko')">
+          한국어
+        </button>
+
+        <button id="btn-en"
+                type="button"
+                onclick="setLanguage('en')">
+          English
+        </button>
       </div>
     </header>
 
-    <h2 id="heading"></h2>
-    <p id="welcome"></p>
-    <p id="contact"></p>
+    <section>
+      <h2 id="heading"></h2>
 
-    <p>
-      <strong id="emailLabel"></strong>
-      <a href="mailto:YOUR_EMAIL">YOUR_EMAIL</a>
-    </p>
+      <p id="welcome"></p>
 
-    <h3 id="detailsHeading"></h3>
-    <ul>
-      <li id="device"></li>
-      <li id="version"></li>
-      <li id="issue"></li>
-    </ul>
+      <p id="contact"></p>
+
+      <p>
+        <strong id="emailLabel"></strong>
+        <a href="mailto:ironmarch26@gmail.com">
+          ironmarch26@gmail.com
+        </a>
+      </p>
+
+      <h3 id="detailsHeading"></h3>
+
+      <ul>
+        <li id="device"></li>
+        <li id="version"></li>
+        <li id="issue"></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; <span id="year"></span>
+      Knight's March. All rights reserved.
+    </footer>
   </main>
 
   <script>
     const translations = {
       ko: {
         heading: "고객지원",
-        welcome: "Knight's March를 이용해 주셔서 감사합니다.",
-        contact: "게임 이용 중 문제가 발생하거나 문의 사항이 있다면 아래 이메일로 연락해 주세요.",
-        emailLabel: "이메일: ironmarch26@gmail.com",
-        detailsHeading: "문의 시 다음 정보를 알려주세요.",
+        welcome:
+          "Knight's March를 이용해 주셔서 감사합니다.",
+        contact:
+          "게임 관련 문의나 오류 신고는 아래 이메일로 연락해 주세요.",
+        emailLabel: "이메일: ",
+        detailsHeading:
+          "문의 시 다음 정보를 알려주세요.",
         device: "기기 모델 및 OS 버전",
         version: "게임 버전",
         issue: "문제 상황에 대한 설명"
       },
+
       en: {
         heading: "Support",
-        welcome: "Thank you for playing Knight's March.",
-        contact: "For questions, bug reports, or assistance, please contact us by email.",
-        emailLabel: "Email: ironmarch26@gmail.com",
-        detailsHeading: "Please include the following details.",
+        welcome:
+          "Thank you for playing Knight's March.",
+        contact:
+          "For questions, bug reports, or assistance, please contact us by email.",
+        emailLabel: "Email: ",
+        detailsHeading:
+          "Please include the following details.",
         device: "Device model and OS version",
         version: "Game version",
         issue: "Description of the issue"
@@ -94,18 +203,47 @@
     };
 
     function setLanguage(lang) {
-      const t = translations[lang] || translations.en;
+      if (!translations[lang]) {
+        lang = "en";
+      }
+
+      const t = translations[lang];
+
       document.documentElement.lang = lang;
+
       for (const key in t) {
         document.getElementById(key).textContent = t[key];
       }
+
+      document.getElementById("btn-ko")
+        .classList.toggle("active", lang === "ko");
+
+      document.getElementById("btn-en")
+        .classList.toggle("active", lang === "en");
+
+      document.getElementById("btn-ko")
+        .setAttribute("aria-pressed", lang === "ko");
+
+      document.getElementById("btn-en")
+        .setAttribute("aria-pressed", lang === "en");
     }
 
+    // Detect browser language
     const browserLanguage =
-      navigator.language.toLowerCase().startsWith("ko")
-        ? "ko" : "en";
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "en";
 
-    setLanguage(browserLanguage);
+    const initialLanguage =
+      browserLanguage.toLowerCase().startsWith("ko")
+        ? "ko"
+        : "en";
+
+    setLanguage(initialLanguage);
+
+    // Copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
   </script>
 </body>
 </html>
